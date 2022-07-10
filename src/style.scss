@@ -1,0 +1,15 @@
+$square-size: 250px;
+
+.app {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 0px;
+  width: $square-size * 3;
+
+  .square {
+    height: $square-size;
+    width: $square-size;
+    border: solid 2px black;
+  }
+}
