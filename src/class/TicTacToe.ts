@@ -23,7 +23,11 @@ export class TicTacToe {
     throw new Error(`No value at ${x} ${y} position`);
   }
 
-  public play(x: number, y: number): void {
+  public play(x: number, y: number): SquareValue {
+    if (this.winner) {
+      throw new Error(`${this.winner} wins!`);
+    }
+
     if (this.getValue(x, y) !== SquareValue.EMPTY) {
       throw new Error("Square already taken");
     }
@@ -37,6 +41,8 @@ export class TicTacToe {
     }
 
     this.winner = this.detectWinner();
+
+    return this.getValue(x, y);
   }
 
   private detectWinner(): string | undefined {
@@ -65,6 +71,7 @@ export class TicTacToe {
   private detectHorizontalWin(): SquareValue | undefined {
     for (let i = 0; i < this.grid.length; i++) {
       if (
+        this.grid[i][0] !== SquareValue.EMPTY &&
         this.grid[i][0] === this.grid[i][1] &&
         this.grid[i][1] === this.grid[i][2]
       ) {
@@ -78,6 +85,7 @@ export class TicTacToe {
   private detectVerticalWin(): SquareValue | undefined {
     for (let i = 0; i < this.grid.length; i++) {
       if (
+        this.grid[0][i] !== SquareValue.EMPTY &&
         this.grid[0][i] === this.grid[1][i] &&
         this.grid[1][i] === this.grid[2][i]
       ) {
@@ -90,6 +98,7 @@ export class TicTacToe {
 
   private detectDiagonalWin(): SquareValue | undefined {
     if (
+      this.grid[0][0] !== SquareValue.EMPTY &&
       this.grid[0][0] === this.grid[1][1] &&
       this.grid[1][1] === this.grid[2][2]
     ) {
@@ -97,6 +106,7 @@ export class TicTacToe {
     }
 
     if (
+      this.grid[0][2] !== SquareValue.EMPTY &&
       this.grid[0][2] === this.grid[1][1] &&
       this.grid[1][1] === this.grid[2][0]
     ) {

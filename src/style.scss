@@ -1,5 +1,12 @@
 $square-size: 250px;
 
+@mixin center-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .app {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -11,5 +18,15 @@ $square-size: 250px;
     height: $square-size;
     width: $square-size;
     border: solid 2px black;
+
+    &[data-value="X"]::after {
+      @include center-letter;
+      content: "X";
+    }
+
+    &[data-value="O"]::after {
+      @include center-letter;
+      content: "O";
+    }
   }
 }
