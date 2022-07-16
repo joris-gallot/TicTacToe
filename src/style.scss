@@ -12,7 +12,7 @@ $square-size: 250px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 0px;
-  width: $square-size * 3;
+  width: ($square-size + 4px) * 3;
 
   .square {
     height: $square-size;

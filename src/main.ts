@@ -1,6 +1,20 @@
+import { io } from "socket.io-client";
+import { generateUsername } from "unique-username-generator";
 import { TicTacToe } from "./class/TicTacToe";
 import { SquareValue } from "./enum/SquareValue";
 import "./style.scss";
+
+const socket = io();
+
+const name =
+  prompt("Please enter your name", generateUsername(undefined, undefined, 6)) ||
+  generateUsername(undefined, undefined, 6);
+
+socket.emit("name?", name);
+
+socket.on("update:users", (users: string[]) => {
+  console.log("users", users);
+});
 
 const app = document.querySelector(".app")!;
 const squares = Array.from(app.children);
